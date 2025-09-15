@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Akshat ❤ Janvi — Forever Love</title>
+  <style>
+    :root{
+      --pink1:#ff7ee1;--pink2:#ff4e4e;--pink3:#ed04b3;--white:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;overflow:hidden;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; 
+      background: radial-gradient(1200px 600px at 10% 10%, #ffd1e6, transparent 60%),
+                  radial-gradient(900px 900px at 90% 80%, #ffc1dd, transparent 60%),
+                  linear-gradient(135deg, #ff758c, var(--pink1), var(--pink2));
+      display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
+    }
+
+    /* Main title */
+    h1{position:relative;margin:0;color:var(--white);font-weight:800;font-size:clamp(28px,5vw,64px);letter-spacing:1.5px;z-index:10;animation:glow 2.4s ease-in-out infinite alternate}
+    @keyframes glow{0%{text-shadow:0 0 8px #e72525,0 0 18px #fdcae5,0 0 28px #ff99cc}100%{text-shadow:0 0 16px #f6e3e3,0 0 36px #ffc6e3,0 0 64px #ff66cc}}
+
+    /* Rotating dotted ring around title */
+    .ring{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+    .ring::before{content:"";width:min(72vmin,460px);height:min(72vmin,460px);border-radius:50%;border:4px dashed rgba(255,255,255,.8);filter:drop-shadow(0 0 10px rgba(255,255,255,.6));animation:spin 12s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Sub text typewriter */
+    .typewriter{color:hsl(0, 100%, 2%);font-size:clamp(16px,2.6vw,28px);font-weight:600;min-height:2.2em;z-index:10}
+    .cursor{display:inline-block;width:2px;height:1em;background:#fff;animation:blink 1s steps(1) infinite;margin-left:4px;vertical-align:middle}
+    @keyframes blink{50%{opacity:0}}
+
+    /* Buttons */
+    .controls{z-index:20;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    button{background:#fff;color:var(--pink2);border:none;border-radius:999px;padding:12px 18px;font-size:16px;font-weight:700;box-shadow:0 10px 24px rgba(0,0,0,.15);cursor:pointer;transition:transform .2s, box-shadow .2s}
+    button:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 14px 28px rgba(0,0,0,.18)}
+
+    /* Floating hearts */
+    .heart{position:fixed;width:18px;height:18px;background:#ff2b6a;transform:rotate(45deg);animation:float 6s linear forwards}
+    .heart::before,.heart::after{content:"";position:absolute;width:18px;height:18px;background:#ff2b6a;border-radius:50%}
+    .heart::before{top:-9px;left:0}
+    .heart::after{left:-9px;top:0}
+    @keyframes float{0%{transform:translateY(0) scale(.6) rotate(45deg);opacity:1}100%{transform:translateY(-110vh) scale(1.15) rotate(45deg);opacity:0}}
+
+    /* Floating "I love you" texts */
+    .love-text{position:fixed;color:#fff;font-weight:800;text-shadow:0 2px 6px rgba(0,0,0,.25);animation:textFloat 7s linear forwards;white-space:nowrap;user-select:none}
+    @keyframes textFloat{from{transform:translateY(0);opacity:1}to{transform:translateY(-105vh);opacity:0}}
+
+    /* Sparkles */
+    .star{position:fixed;width:6px;height:6px;background:#fff;border-radius:50%;filter:drop-shadow(0 0 6px #fff);animation:sparkle 2.8s linear forwards}
+    @keyframes sparkle{0%{transform:scale(0);opacity:0}50%{transform:scale(1.6);opacity:1}100%{transform:scale(0);opacity:0}}
+
+    /* Roses */
+    .rose{position:fixed;font-size:24px;animation:floatRose 9s linear forwards}
+    @keyframes floatRose{from{transform:translateY(0);opacity:1}to{transform:translateY(-110vh) rotate(6deg);opacity:0}}
+
+    /* Cursor heart trail */
+    .trail{position:fixed;font-size:14px;pointer-events:none;animation:trailUp .9s ease-out forwards}
+    @keyframes trailUp{to{transform:translateY(-24px);opacity:0}}
+
+    /* AJ initials badge */
+    .badge{position:fixed;bottom:16px;right:16px;background:rgba(255,255,255,.2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.45);color:#fff;padding:10px 14px;border-radius:18px;font-weight:700;letter-spacing:.5px;box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:30}
+
+    /* Firework hearts (particles via CSS var) */
+    .boom{position:fixed;left:0;top:0;pointer-events:none;}
+    .boom i{position:absolute;width:14px;height:14px;background:#ff2b6a;transform:rotate(45deg);border-radius:2px;opacity:0;animation:burst .9s ease-out forwards}
+    .boom i::before,.boom i::after{content:"";position:absolute;width:14px;height:14px;background:#ff2b6a;border-radius:50%}
+    .boom i::before{top:-7px;left:0}
+    .boom i::after{left:-7px;top:0}
+    @keyframes burst{0%{transform:translate(0,0) scale(.2) rotate(45deg);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(45deg);opacity:0}}
+
+    /* Footer message */
+    .footer{position:fixed;bottom:16px;left:16px;color:#fff;font-weight:600;text-shadow:0 2px 6px rgba(0,0,0,.25);z-index:30}
+  </style>
+</head>
+<body>
+  <div class="ring" aria-hidden="true"></div>
+  <h1>Akshat ❤ Janvi</h1>
+  <div class="typewriter" id="tw"></div>
+
+  <div class="controls">
+    <button id="btnBoom">Heart Fireworks 🎆</button>
+    <button id="btnConfess">Say It Again 💌</button>
+    <button id="btnRoses">Rain Roses 🌹</button>
+    <button id="btnMusic">Music 🎶</button>
+  </div>
+
+  <div class="badge">A ❤ J</div>
+  <div class="footer">Made with infinite love by Janvi for Akshat</div>
+
+  <!-- Optional music (starts muted; click Music to unmute) -->
+  <audio id="bgm" loop muted>
+    <!-- You can replace the src below with your own mp3 file path -->
+    <source src="" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // ====== CONFIG (edit these lines if you want) ======
+    const loverName = "Akshat";
+    const authorName = "Janvi";
+
+    // Messages for typewriter & floating text
+    const lines = [
+      `I love you too till my last breath, ${loverName} ❤️`,
+      `${authorName} ❤ ${loverName} — forever`,
+      `I'll always love you too Akshvii, ${loverName} 💖`,
+      `Always with you till my last breath honey , ${loverName} ✨`,
+      `You + Me = Infinity ♾️`,
+      `Mera dil sirf tumhara h meri jaan , ${loverName} 💞`,
+      `love you always honey, ${loverName} `,
+    ];
+
+    // ====== Typewriter ======
+    const tw = document.getElementById('tw');
+    let li = 0, ci = 0, deleting = false;
+    function type(){
+      const text = lines[li];
+      if(!deleting){
+        tw.textContent = text.slice(0, ++ci);
+        if(ci === text.length){
+          deleting = true; setTimeout(type, 900); return;
+        }
+      } else {
+        tw.textContent = text.slice(0, --ci);
+        if(ci === 0){
+          deleting = false; li = (li+1)%lines.length; 
+        }
+      }
+      setTimeout(type, deleting ? 28 : 42);
+    }
+    type();
+
+    // cursor element
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor'; tw.appendChild(cursor);
+
+    // ====== Floating generators ======
+    function createHeart(x){
+      const el = document.createElement('div');
+      el.className = 'heart';
+      el.style.left = (x ?? Math.random()*innerWidth) + 'px';
+      el.style.bottom = '-20px';
+      el.style.animationDuration = (3 + Math.random()*3) + 's';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), 6500);
+    }
+
+    function createText(){
+      const el = document.createElement('div');
+      el.className = 'love-text';
+      el.textContent = `I love you too, ${loverName} ❤`;
+      el.style.left = Math.random()*innerWidth + 'px';
+      el.style.bottom = '-10px';
+      el.style.fontSize = (18 + Math.random()*20) + 'px';
+      el.style.animationDuration = (4 + Math.random()*4) + 's';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), 7200);
+    }
+
+    function createStar(){
+      const el = document.createElement('div'); el.className='star';
+      el.style.left = Math.random()*innerWidth + 'px';
+      el.style.top  = Math.random()*innerHeight + 'px';
+      el.style.animationDuration = (1.8 + Math.random()*2.2) + 's';
+      document.body.appendChild(el); setTimeout(()=>el.remove(), 3000);
+    }
+
+    function createRose(){
+      const el = document.createElement('div'); el.className='rose'; el.textContent='🌹';
+      el.style.left = Math.random()*innerWidth + 'px';
+      el.style.bottom='-20px'; el.style.fontSize=(20+Math.random()*18)+'px';
+      el.style.animationDuration=(6+Math.random()*5)+'s';
+      document.body.appendChild(el); setTimeout(()=>el.remove(), 9000);
+    }
+
+    // Interval waves
+    setInterval(()=>createHeart(), 180);
+    setInterval(()=>createText(), 1200);
+    setInterval(()=>createStar(), 420);
+    setInterval(()=>createRose(), 2200);
+
+    // Cursor heart trail
+    window.addEventListener('pointermove', (e)=>{
+      const t = document.createElement('div'); t.className='trail'; t.textContent='❤';
+      t.style.left = (e.clientX+8)+'px'; t.style.top = (e.clientY+8)+'px';
+      document.body.appendChild(t); setTimeout(()=>t.remove(), 900);
+    });
+
+    // Heart fireworks at (x,y)
+    function boom(x,y){
+      const n=18, R=120; const box=document.createElement('div'); box.className='boom';
+      box.style.left = x+'px'; box.style.top=y+'px'; document.body.appendChild(box);
+      for(let i=0;i<n;i++){
+        const a = (i/n)*Math.PI*2; const dx = Math.cos(a)*R + (Math.random()*30-15);
+        const dy = Math.sin(a)*R + (Math.random()*30-15);
+        const p = document.createElement('i'); p.style.setProperty('--dx', dx+'px'); p.style.setProperty('--dy', dy+'px');
+        p.style.left = x+'px'; p.style.top = y+'px'; box.appendChild(p);
+        setTimeout(()=>p.remove(), 950);
+      }
+      setTimeout(()=>box.remove(), 980);
+    }
+
+    // Buttons
+    document.getElementById('btnBoom').addEventListener('click', ()=>{
+      const cx = innerWidth/2, cy = innerHeight/2; boom(cx, cy);
+    });
+    document.getElementById('btnConfess').addEventListener('click', ()=>{
+      for(let i=0;i<24;i++){ setTimeout(()=>createText(), i*90); }
+    });
+    document.getElementById('btnRoses').addEventListener('click', ()=>{
+      for(let i=0;i<30;i++){ setTimeout(()=>createRose(), i*80); }
+    });
+
+    // Click anywhere to burst hearts
+    window.addEventListener('click', (e)=> boom(e.clientX, e.clientY));
+
+    // Music toggle (provide your own mp3 URL in <source>)
+    const btnMusic = document.getElementById('btnMusic');
+    const bgm = document.getElementById('bgm');
+    btnMusic.addEventListener('click', async ()=>{
+      try{
+        if(bgm.paused){
+          bgm.muted = false; await bgm.play(); btnMusic.textContent='Pause Music ⏸️';
+        }else{ bgm.pause(); btnMusic.textContent='Music 🎶'; }
+      }catch(e){ alert('Add a valid music file URL in the <audio> tag to enable music.'); }
+    });
+
+    // Nice intro: central burst and a wave of hearts
+    setTimeout(()=>{
+      boom(innerWidth/2, innerHeight/2);
+      for(let i=0;i<36;i++){ setTimeout(()=>createHeart(), i*70); }
+    }, 500);
+  </script>
+</body>
+</html>
